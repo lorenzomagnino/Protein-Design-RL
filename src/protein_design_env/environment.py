@@ -16,7 +16,7 @@ from protein_design_env.constants import (
     NUM_AMINO_ACIDS,
     REWARD_PER_MOTIF,
 )
-from src.protein_design_env.constants import CHARGE_PENALTY
+from protein_design_env.constants import CHARGE_PENALTY
 
 
 class Environment(gym.Env):
@@ -83,7 +83,13 @@ class Environment(gym.Env):
 
     def step(self, action: int) -> tuple[NDArray, float, bool, bool, dict[str, Any]]:
         """Adds an amino acid, compute the reward and the termination condition."""
-        self.state.append(AminoAcids(action).value)
+        # Since algorithms DQN use 0 starting then we map zero-based action to one-based action
+        one_based_action = action + 1
+        # Validate the mapped action
+        if one_based_action not in range(1, NUM_AMINO_ACIDS + 1):
+            raise ValueError(f"Invalid action: {one_based_action}")
+            
+        self.state.append(AminoAcids(one_based_action).value)
 
         reward = self._get_reward()
         terminated = truncated = len(self.state) >= self.sequence_length
