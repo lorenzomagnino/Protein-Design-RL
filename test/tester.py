@@ -37,15 +37,17 @@ class Tester():
             obs, reward, done, _, _ = self.env.step(action)
             total_reward += reward
 
-
         # Extract the padded sequence
         current_sequence = obs[:MAX_SEQUENCE_LENGTH]
+        current_sequence = current_sequence[current_sequence!=0]
+
         current_sequence = self.convert_to_amino_acids(current_sequence)
         # Extract the actual sequence length
         sequence_length = int(obs[MAX_SEQUENCE_LENGTH])
 
         # Extract the padded target motif
         target_motif = obs[MAX_SEQUENCE_LENGTH + 1:MAX_SEQUENCE_LENGTH + 1 + MAX_MOTIF_LENGTH]
+        target_motif = target_motif[target_motif!=0]
         target_motif = self.convert_to_amino_acids(target_motif)
         # Extract the target sequence length
         target_sequence_length = int(obs[MAX_SEQUENCE_LENGTH + 1 + MAX_MOTIF_LENGTH])
@@ -54,7 +56,7 @@ class Tester():
         sequence_charge = int(obs[MAX_SEQUENCE_LENGTH + 1 + MAX_MOTIF_LENGTH + 1]) 
 
         logging.info(f"""
-        Current Sequence: {current_sequence}
+        Current Sequence (unpadded): {current_sequence}
         Target Motif: {target_motif}
         Sequence Length: {sequence_length}
         Target Sequence Length: {sequence_length}

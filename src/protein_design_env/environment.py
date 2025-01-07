@@ -3,6 +3,7 @@ import gymnasium as gym
 import numpy as np
 from numpy._typing import NDArray
 from numpy.lib.stride_tricks import sliding_window_view
+import logging
 
 from protein_design_env.amino_acids import AMINO_ACIDS_TO_CHARGES_DICT, AminoAcids
 from protein_design_env.constants import (
@@ -51,7 +52,8 @@ class Environment(gym.Env):
         self.sequence_length = DEFAULT_SEQUENCE_LENGTH
 
         self.state: list[int] = []
-        self.action_space = gym.spaces.Discrete(start=1, n=NUM_AMINO_ACIDS)
+        #self.action_space = gym.spaces.Discrete(start=1, n=NUM_AMINO_ACIDS)
+        self.action_space = gym.spaces.Discrete(NUM_AMINO_ACIDS)
         highest_value_possible_in_obs = max(MAX_SEQUENCE_LENGTH, MAX_MOTIF_LENGTH, NUM_AMINO_ACIDS)
         self.observation_space = gym.spaces.Box(
             low=-highest_value_possible_in_obs,
@@ -79,13 +81,13 @@ class Environment(gym.Env):
         self.sequence_length = self._generate_sequence_length()
         self.state.clear()
         obs = self._get_observation()
+        #logging.debug(f"Reset Observation: {obs}")
         return obs, {}
 
     def step(self, action: int) -> tuple[NDArray, float, bool, bool, dict[str, Any]]:
         """Adds an amino acid, compute the reward and the termination condition."""
         # Since algorithms DQN use 0 starting then we map zero-based action to one-based action
         one_based_action = action + 1
-        # Validate the mapped action
         if one_based_action not in range(1, NUM_AMINO_ACIDS + 1):
             raise ValueError(f"Invalid action: {one_based_action}")
             
@@ -147,6 +149,7 @@ class Environment(gym.Env):
             self.motif: list[int] = self.rng.choice(  # type: ignore[no-redef]
                 AMINO_ACIDS_VALUES, replace=True, size=motif_length
             ).tolist()
+        logging.debug
         return self.motif  # type: ignore[no-any-return]
 
     def _generate_sequence_length(self) -> int:

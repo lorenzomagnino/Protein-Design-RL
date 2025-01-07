@@ -11,4 +11,11 @@
 
 # Load modules
 module purge 
+module load anaconda3/2022.10
+
+cd Protein-Design-RL
+
+source .venv/bin/activate
+
+python main.py --mode 1 --algo A2C
 

@@ -12,7 +12,7 @@ def parse_args():
     parser.add_argument("--algo", type=str, default="PPO",
                         choices=["PPO", "DQN", "A2C"],
                         help="The RL algorithm to use")
-    parser.add_argument("--timesteps", type=int, default=10000,
+    parser.add_argument("--timesteps", type=int, default=50000,
                         help="Total training timesteps")
     parser.add_argument("--variable_motif", action="store_true",
                         help="Enable variable motif (Problem 3)")
@@ -44,9 +44,11 @@ if __name__ == "__main__":
         )
 
     agent = Agent(args)
+    
     if args.mode==1: 
         logging.info(f"-----------Start Training with {args.algo}-----------")
         agent.train()
+
     if args.mode==2: 
         name = f"{args.algo}_Protein_Design.zip"
         model_path = os.path.join(args.dir, name)

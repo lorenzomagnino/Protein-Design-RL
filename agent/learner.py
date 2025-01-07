@@ -47,7 +47,7 @@ class Agent():
 
         # Train the model
         print(f"Training {self.args.algo} on {self.args.env_name} for {self.args.timesteps} timesteps...")
-        self.model.learn(total_timesteps=self.args.timesteps, callback=self.callback())
+        self.model.learn(total_timesteps=self.args.timesteps, callback=self.callback(), progress_bar = True)
 
 
         if self.args.model_save_bool: 
