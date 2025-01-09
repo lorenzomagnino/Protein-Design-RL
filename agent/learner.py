@@ -12,9 +12,27 @@ from stable_baselines3.common.utils import get_schedule_fn
 import torch.nn as nn
 
 
-
-
 class Agent():
+    """ 
+    This class defines a reinforcement learning agent for protein design.
+    
+    The agent can be initialized with different algorithms (PPO, DQN, A2C) and 
+    can be trained on a specified environment. The class also supports saving 
+    the trained model and evaluating its performance using callbacks.
+
+    Parameters:
+    - args: Command line arguments used to initialize the agent.
+    - env: The environment in which the agent will be trained.
+    - model: The reinforcement learning model used by the agent.
+
+    Methods:
+    - __init__(self, args): Initialize the agent with the command line arguments.
+    - initialize_model(self): Initialize the model based on the algorithm specified in the command line arguments.
+    - callback(self): Create an evaluation callback for the agent.
+    - train(self): Train the reinforcement learning agent.
+    - save_model(self): Save the trained model to a specified directory.
+
+    """
     def __init__(self, args):
         """ Initialize the agent with the command line arguments. """
         self.args = args

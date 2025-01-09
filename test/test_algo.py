@@ -3,14 +3,14 @@ from src.protein_design_env.constants import *
 from src.protein_design_env.amino_acids import AminoAcids
 
 class Tester():
+    """
+    Initialize the tester with the trained agent.
+    Args:
+        model (Agent): The trained agent instance.
+        env (Environment) : The protein design environment
+        args : command line arguments
+    """
     def __init__(self, model, env, args):
-        """
-        Initialize the tester with the trained agent.
-
-        Args:
-            model (Agent): The trained agent instance.
-            env (Environment) : The protein design environment
-        """
         self.model = model
         self.env = env
         self.args = args

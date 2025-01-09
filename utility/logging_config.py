@@ -27,7 +27,7 @@ def configure_logging(level=logging.INFO):
     # Clear any existing handlers
     logger = logging.getLogger()
     if logger.hasHandlers():
-        logger.handlers.clear()  # Remove all existing handlers
+        logger.handlers.clear()
 
     logger.setLevel(level)
     logger.addHandler(handler)
