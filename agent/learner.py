@@ -34,7 +34,7 @@ class Agent():
 
     """
     def __init__(self, args):
-        """ Initialize the agent with the command line arguments. """
+
         self.args = args
         self.env = gym.make(
             args.env_name,
@@ -45,6 +45,7 @@ class Agent():
 
     def initialize_model(self):
         """ Initialize the model based on the algorithm specified in the command line arguments. """
+
         if self.args.algo == "PPO":
             if self.args.manual:
                 """ Defined a speicifed model if required. We use that to experiment new settings """
@@ -77,7 +78,16 @@ class Agent():
             raise ValueError(f"Unsupported algorithm: {self.args.algo}")
 
     def callback(self):
-        """ Evaluation callback. """
+        """ 
+        Create an evaluation callback for the agent.
+        
+        This method sets up an evaluation callback that will be used during training to periodically evaluate the performance of the agent. 
+        The evaluation results are saved to a specified directory. 
+        The directory path is determined based on whether the environment has variable motifs and/or variable sequence lengths.
+
+        Returns:
+        - eval_callback: An instance of EvalCallback configured with the evaluation environment and save paths.
+        """
         if self.args.variable_motif and self.args.variable_length:
             best_model_save_path = f"./saved-model/{self.args.algo}_Protein_Design_rng_motif_length"
         elif self.args.variable_length and not self.args.variable_motif:
@@ -101,7 +111,8 @@ class Agent():
             
     def train(self):
         """
-        Train a reinforcement learning agent to solve Problem 1, 2, 3"""
+        Train a reinforcement learning agent to solve Problem 1, 2, 3
+        """
 
         # Train the model
         print(f"Training {self.args.algo} on {self.args.env_name} for {self.args.timesteps} timesteps...")
@@ -119,6 +130,7 @@ class Agent():
             name = f"{self.args.algo}_Protein_Design_rng_length"
         else: 
             name = f"{self.args.algo}_Protein_Design"
+
         model_path = os.path.join(self.args.dir, name)
         self.model.save(model_path)
         print(f"Model saved at {model_path}")

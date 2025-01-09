@@ -2,12 +2,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-
-
-""" ---- Plotting from csv ---- """
+""" 
+--------------------------------
+        Plotting from CSV
+--------------------------------
+"""
 
 
 # Load the CSV files
+# Each CSV file contains the training steps and corresponding mean episode lengths for different algorithms
+
 csv_file_A2C = "/gpfsnyu/home/lm5489/Protein-Design-RL/utility/results_csv/problem_2/mean_ep_length_A2C_2.csv"
 data_A2C = pd.read_csv(csv_file_A2C)
 
@@ -19,6 +23,8 @@ csv_file_PPO = "/gpfsnyu/home/lm5489/Protein-Design-RL/utility/results_csv/probl
 data_PPO = pd.read_csv(csv_file_PPO)
 
 # Extract Steps and Values for each algorithm
+# 'Step' column contains the training steps
+# 'Value' column contains the mean episode length
 steps_A2C = data_A2C['Step']
 values_A2C = data_A2C['Value']
 

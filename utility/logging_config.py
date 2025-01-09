@@ -3,6 +3,7 @@ from colorlog import ColoredFormatter
 
 def configure_logging(level=logging.INFO):
     """ Configure the logging module to use colored output. """
+    
     log_format = (
         "%(log_color)s%(levelname)-8s%(reset)s "
         "%(log_color)s%(message)s%(reset)s"
