@@ -42,6 +42,7 @@ The agent's goal is to optimize amino acid sequences that:
 
 ```
 git clone https://github.com/lorenzomagnino/Protein-Design-RL.git
+cd Protein-Design-RL
 ```
 
 - Install uv with curl (or the latest version with pip): ```curl -LsSf https://astral.sh/uv/install.sh | sh```
