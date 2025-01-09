@@ -1,8 +1,0 @@
-/var/spool/slurmd/job564565/slurm_script: line 16: cd: Protein-Design-RL: No such file or directory
-/gpfsnyu/home/lm5489/Protein-Design-RL/.venv/lib/python3.10/site-packages/gymnasium/envs/registration.py:642: UserWarning: [33mWARN: Overriding environment Protein-Design-v0 already in registry.[0m
-  logger.warn(f"Overriding environment {new_spec.id} already in registry.")
-[1;34mINFO    [0m [1;34m-----------Start Training with DQN-----------[0m
-/gpfsnyu/home/lm5489/Protein-Design-RL/.venv/lib/python3.10/site-packages/stable_baselines3/common/evaluation.py:67: UserWarning: Evaluation environment is not wrapped with a ``Monitor`` wrapper. This may result in reporting modified episode lengths and rewards, if other wrappers happen to modify these. Consider wrapping environment first with ``Monitor`` wrapper.
-  warnings.warn(
-/gpfsnyu/home/lm5489/Protein-Design-RL/.venv/lib/python3.10/site-packages/stable_baselines3/common/evaluation.py:67: UserWarning: Evaluation environment is not wrapped with a ``Monitor`` wrapper. This may result in reporting modified episode lengths and rewards, if other wrappers happen to modify these. Consider wrapping environment first with ``Monitor`` wrapper.
-  warnings.warn(

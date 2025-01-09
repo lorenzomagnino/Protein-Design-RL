@@ -81,12 +81,12 @@ class Environment(gym.Env):
         self.sequence_length = self._generate_sequence_length()
         self.state.clear()
         obs = self._get_observation()
-        #logging.debug(f"Reset Observation: {obs}")
+        #logging.debug(f"motif: {self.motif}; sequence_lenght: {self.sequence_length}")
         return obs, {}
 
     def step(self, action: int) -> tuple[NDArray, float, bool, bool, dict[str, Any]]:
         """Adds an amino acid, compute the reward and the termination condition."""
-        # Since algorithms DQN use 0 starting then we map zero-based action to one-based action
+        # Since algorithms use 0 starting then we map zero-based action to one-based action
         one_based_action = action + 1
         if one_based_action not in range(1, NUM_AMINO_ACIDS + 1):
             raise ValueError(f"Invalid action: {one_based_action}")
@@ -149,7 +149,6 @@ class Environment(gym.Env):
             self.motif: list[int] = self.rng.choice(  # type: ignore[no-redef]
                 AMINO_ACIDS_VALUES, replace=True, size=motif_length
             ).tolist()
-        logging.debug
         return self.motif  # type: ignore[no-any-return]
 
     def _generate_sequence_length(self) -> int:
