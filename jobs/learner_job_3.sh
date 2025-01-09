@@ -17,5 +17,5 @@ cd Protein-Design-RL
 
 source .venv/bin/activate
 
-python problem_2.py --mode 1 --algo PPO --timesteps 70000
+python problem_3.py --mode 1 --algo PPO --timesteps 100000
 

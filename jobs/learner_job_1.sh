@@ -11,11 +11,11 @@
 
 # Load modules
 module purge 
-module load anaconda3/2022.10
+module load anaconda3/2022.10 
 
 cd Protein-Design-RL
 
 source .venv/bin/activate
 
-python problem_2.py --mode 1 --algo A2C --timesteps 70000
+python problem_3.py --mode 1 --algo A2C --timesteps 100000
 

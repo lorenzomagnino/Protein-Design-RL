@@ -4,15 +4,18 @@ import matplotlib.pyplot as plt
 
 
 
-""" ---- Train_loss ---- """
+""" ---- Plotting from csv ---- """
+
+
 # Load the CSV files
-csv_file_A2C = "/gpfsnyu/home/lm5489/Protein-Design-RL/utility/results_csv/problem_1.py/train_entropy_loss_A2C.csv"
+csv_file_A2C = "/gpfsnyu/home/lm5489/Protein-Design-RL/utility/results_csv/problem_2/mean_ep_length_A2C_2.csv"
 data_A2C = pd.read_csv(csv_file_A2C)
 
-csv_file_DQN = "/gpfsnyu/home/lm5489/Protein-Design-RL/utility/results_csv/problem_1.py/train_loss_DQN.csv"
+csv_file_DQN = "/gpfsnyu/home/lm5489/Protein-Design-RL/utility/results_csv/problem_2/mean_ep_length_DQN_2.csv"
 data_DQN = pd.read_csv(csv_file_DQN)
 
-csv_file_PPO = "/gpfsnyu/home/lm5489/Protein-Design-RL/utility/results_csv/problem_1.py/train_entropy_loss_PPO.csv"
+
+csv_file_PPO = "/gpfsnyu/home/lm5489/Protein-Design-RL/utility/results_csv/problem_2/mean_ep_length_PPO_2.csv"
 data_PPO = pd.read_csv(csv_file_PPO)
 
 # Extract Steps and Values for each algorithm
@@ -35,18 +38,19 @@ plt.gcf().set_facecolor("floralwhite")
 
 # Plot each algorithm
 plt.plot(steps_A2C, values_A2C, label="A2C", color="coral", linewidth=2)
-#plt.plot(steps_DQN, values_DQN, label="DQN", color="gold", linewidth=2)
-#plt.plot(steps_PPO, values_PPO, label="PPO", color="crimson", linewidth=2)
+plt.plot(steps_DQN, values_DQN, label="DQN", color="gold", linewidth=2)
+plt.plot(steps_PPO, values_PPO, label="PPO", color="crimson", linewidth=2)
 plt.grid(color="white", linestyle="-", linewidth=1)
 
 # Add labels, title, and legend
 plt.xlabel("Training Steps")
-plt.ylabel("Entropy Loss")
-plt.title("Train Entropy Loss A2C")
+plt.ylabel("Length")
+plt.title("Mean Episode Length")
 plt.legend()
 
+name = "mean_episode_length_2"
 # Save the plot as an image
-plt.savefig("/gpfsnyu/home/lm5489/Protein-Design-RL/figures/problem_1/train_entropy_loss_A2C.pdf")  # Save as PDF
+plt.savefig(f"/gpfsnyu/home/lm5489/Protein-Design-RL/figures/problem_2/{name}.pdf")  # Save as PDF
 
 # Show the plot
 plt.show()

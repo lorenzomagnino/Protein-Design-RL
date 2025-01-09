@@ -14,6 +14,7 @@ def parse_args():
                         help="Enable variable sequence length (Problems 2 and 3)")
     parser.add_argument("--env_name", type=str, default="Protein-Design-v0", help="select the environment") 
     parser.add_argument("--mode", type=int, default=1, help="1:train 2:test")
+    parser.add_argument("--manual", type=bool, default=False, help="If True the model is createed with specified paramters (Use only in Problem 3!)")
     # save and load
     parsed_args, remaining_argv = parser.parse_known_args()
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))

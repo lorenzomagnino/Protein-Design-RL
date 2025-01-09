@@ -8,6 +8,9 @@ import os
 from stable_baselines3.common.callbacks import CallbackList, EvalCallback
 from stable_baselines3.common.logger import TensorBoardOutputFormat
 from stable_baselines3.common.monitor import Monitor
+from stable_baselines3.common.utils import get_schedule_fn
+import torch.nn as nn
+
 
 
 
@@ -25,7 +28,29 @@ class Agent():
     def initialize_model(self):
         """ Initialize the model based on the algorithm specified in the command line arguments. """
         if self.args.algo == "PPO":
-            self.model = PPO("MlpPolicy", self.env, verbose=1, tensorboard_log=f"./saved-model/{self.args.algo}_Protein_Design")
+            if self.args.manual:
+                """ Defined a speicifed model if required. We use that to experiment new settings """
+                activation_fn = nn.ReLU
+                lr_schedule = get_schedule_fn(3e-4)
+                # Define PPO hyperparameters
+                ppo_params = {
+                    "learning_rate": lr_schedule,         # lr
+                    "n_steps": 1024,              # Steps per update
+                    "batch_size": 64,             # Batch size
+                    "clip_range": 0.2,            # Clipping range
+                    "ent_coef": 0.01,             # Entropy coefficient
+                    "gamma": 0.99,                # Discount factor
+                    "gae_lambda": 0.95,           # GAE lambda
+                    "n_epochs": 10,               # Number of epochs
+                    "policy_kwargs": {            # Policy network architecture
+                        "net_arch": [128, 128],   # 2-layer MLP with 128 units each
+                        "activation_fn": activation_fn,  # Activation function
+                    }
+                }
+                # Create the PPO agent
+                self.model = PPO("MlpPolicy", self.env, verbose=1,tensorboard_log=f"./saved-model/{self.args.algo}_Protein_Design_manual",  **ppo_params)
+
+            else: self.model = PPO("MlpPolicy", self.env, verbose=1, tensorboard_log=f"./saved-model/{self.args.algo}_Protein_Design")
         elif self.args.algo == "DQN":
             self.model = DQN("MlpPolicy", self.env, verbose=1, tensorboard_log=f"./saved-model/{self.args.algo}_Protein_Design")
         elif self.args.algo == "A2C":
