@@ -53,8 +53,6 @@ if __name__ == "__main__":
         if args.take_best_model: model_path = best_model_file_path
         logging.debug(f"the path of the saved model is {model_path}")
 
-        if args.take_best_model: model_path = best_model_file_path
-        logging.debug(f"the path of the saved model is {model_path}")
 
         # Check if the chosen algorithm is supported
         if args.algo not in algo_classes:
