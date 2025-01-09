@@ -41,8 +41,7 @@ The agent's goal is to optimize amino acid sequences that:
 - Clone this repository:
 
 ```
-git clone https://github.com/fredericrenard/protein-design-env.git
-cd protein-design-env
+git clone https://github.com/lorenzomagnino/Protein-Design-RL.git
 ```
 
 - Install uv with curl (or the latest version with pip): ```curl -LsSf https://astral.sh/uv/install.sh | sh```
@@ -51,4 +50,8 @@ cd protein-design-env
 - Activate virtual environment: ```source .venv/bin/activate```
 - Install all requirements: ```uv sync```
 - Install the protein-design-env package: ```pip install -e .```
+- Install other important libraries: ```pip install colorlog, tensorboard, torch```
 - Launch the rollout script: ```uv run python scripts/rollout.py```
+- To train the agent for Problem 1 with PPO (similar for Problem 2 and 3): ```python problem_3.py --mode 1 --algo PPO --timesteps 100000```
+- To visualize training metrics (port 6008 is arbitrary, you can use default 6006): ```tensorboard --logdir ./saved-model --port 6008```
+- To test with the trained model: ```python problem_3.py --mode 2 --algo PPO --take_best_model True```
